@@ -3,6 +3,7 @@
 #include <math.h>
 #include <list>
 #include <cstring>
+#include <iomanip>
 
 using namespace std;
 
@@ -34,8 +35,7 @@ void simulate(int cache_size, int block_size, const char * file_name)
     int size_of_set= block_size >> 2; 
 
     //cout << "cache line: " << line << endl;
-    cout << "cache size: " << cache_size/K << "K" << endl;
-    cout << "block size: " << block_size << endl;
+    cout << "cache size: " << cache_size/K << "K " << "block size: " << block_size << " Miss Rate:";
     
     FILE *fp = fopen(file_name, "r");  // read file
 	
@@ -66,19 +66,28 @@ void simulate(int cache_size, int block_size, const char * file_name)
     }
 	fclose(fp);
     
-    cout<<miss*100/count<<endl;
+    cout<<setprecision(10)<<double(miss)*100/count<<"%"<<endl;
 	
 }
 	
 int main()
 {
 	// Let us simulate 4KB cache with 16B blocks
+    cout<<"radix"<<endl;            
     for(int i=4;i<=256;i*=4){
         for(int j=16;j<=256;j*=2){
-            cout<<"lu"<<endl;
-	        simulate(i * K, j,"LU.txt");
-            cout<<"radix"<<endl;            
 	        simulate(i * K, j,"RADIX.txt");
         }
+        cout<<endl;
     }
+    cout<<endl;
+    cout<<"lu"<<endl;
+
+    for(int i=4;i<=256;i*=4){
+        for(int j=16;j<=256;j*=2){
+	        simulate(i * K, j,"LU.txt");
+        }
+        cout<<endl;
+    }
+
 }
