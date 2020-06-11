@@ -39,7 +39,7 @@ void simulate(int cache_size, int block_size,const char* filename)
 	while(fscanf(fp, "%x", &x) != EOF)
     {
 		++cnt;
-		//cout << hex << x << " ";
+		//cout  << x <<  endl;;
 		index = (x >> offset_bit) & (line - 1);
 		tag = x >> (index_bit + offset_bit);
 		if(cache[index].v && cache[index].tag == tag){
@@ -54,6 +54,7 @@ void simulate(int cache_size, int block_size,const char* filename)
 	}
 
 	cout<<setprecision(10)<<miss_num/cnt*100<<"%"<<endl;
+   // cout << "offset_bit: "<<offset_bit<<" index_bit: "<<index_bit<<endl;
 
 	fclose(fp);
 
