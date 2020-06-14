@@ -5,9 +5,9 @@ module TestBench;
 	reg	CLK, START;
 	integer	handle1, handle2;
 
-	Simple_Single_CPU	cpu(
+	CPU	cpu(
 				.clk_i(CLK),
-				.rst_i(START)
+				.start_i(START)
 				);
 
 initial	begin
@@ -34,8 +34,8 @@ always@(posedge	CLK) begin
 	$fdisplay(handle1, "%h\n", cpu.IM.addr_i);
  else;
 
- if(cpu.Data_Memory.MemWrite_i	|| cpu.Data_Memory.MemRead_i)
-	$fdisplay(handle2, "%h\n", cpu.Data_Memory.addr_i);
+ if(cpu.DM.MemWrite_i	|| cpu.DM.MemRead_i)
+	$fdisplay(handle2, "%h\n", cpu.DM.addr_i);
  else;
 
  end

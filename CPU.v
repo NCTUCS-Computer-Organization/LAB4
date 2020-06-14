@@ -1,13 +1,13 @@
 // Author: 0711282 邱頎霖
 
-module Simple_Single_CPU(
+module CPU(
     clk_i,
-    rst_i
+    start_i
     );
 
 // Input port
 input clk_i;
-input rst_i;
+input start_i;
 
 wire [32-1:0] pc_in;
 wire [32-1:0] pc_out;
@@ -54,7 +54,7 @@ wire [32-1:0] jump_address_2;
 
 ProgramCounter PC(
     .clk_i(clk_i),
-    .rst_i (rst_i),
+    .rst_i (start_i),
     .pc_in_i(pc_in),
     .pc_out_o(pc_out)
     );
@@ -103,7 +103,7 @@ MUX_2to1 #(.size(32)) write_data(
 
 Reg_File RF(
     .clk_i(clk_i),
-    .rst_i(rst_i) ,
+    .rst_i(start_i) ,
     .RSaddr_i(instruction[25:21]) ,
     .RTaddr_i(instruction[20:16]) ,
     .RDaddr_i(number_WriteReg_fromMux) , //from mux before
@@ -229,7 +229,7 @@ MUX_2to1 #(.size(32)) Jrr(
 
 
 
-Data_Memory Data_Memory(
+Data_Memory DM(
 	.clk_i(clk_i),
 	.addr_i(RD_data),
 	.data_i(RT_data),
