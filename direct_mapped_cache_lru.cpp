@@ -70,7 +70,7 @@ void simulate(int cache_size, int block_size, const char * file_name)
             ++count;
         }    
         fclose(fp);
-        cout<<"miss: "<<miss<<" ";
+       // cout<<"miss: "<<miss<<" ";
         cout<<setprecision(10)<<miss*100/count<<"%"<<endl;
        // cout << "offset_bit: "<<offset_bit<<" index_bit: "<<index_bit<<endl;
        // cout<<miss<<" "<<count<<" "<<flag3<<endl;
