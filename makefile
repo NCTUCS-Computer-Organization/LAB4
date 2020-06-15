@@ -1,7 +1,6 @@
-test.vvp : *.v
-	iverilog -o test.vvp *.v
-	vvp test.vvp
-catche.out:direct_mapped_cache.cpp
-	g++ -o catche.out direct_mapped_cache.cpp
+catch.out:direct_mapped_cache.cpp direct_mapped_cache_lru.cpp
+	g++ -o catch.out direct_mapped_cache.cpp
+	g++ -o catch_lru.out direct_mapped_cache_lru.cpp
+#catch_lru.out:
 clean:
-	rm -d DCACHE.txt ICACHE.txt test.vvp
+	rm -f catche.out catch_lri.out

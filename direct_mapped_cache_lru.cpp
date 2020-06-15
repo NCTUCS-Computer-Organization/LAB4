@@ -26,7 +26,7 @@ double log2(double n)
 
 void simulate(int cache_size, int block_size, const char * file_name)
 {   
-    for(int i=1;i<=8;i*=2){
+    for(int i=1;i<=64;i*=2){
         //set number  is i
         
         FILE *fp = fopen(file_name, "r");  // read file
@@ -42,13 +42,14 @@ void simulate(int cache_size, int block_size, const char * file_name)
         int size_of_set= i; 
 
         //cout << "cache line: " << line << endl;
-        cout << "cache size: " << cache_size/K << "K " << i <<"-way" << " Miss Rate:";
+        cout << "cache size: " << cache_size/K << "K " << i <<"-way" << " Miss Rate: ";
 
         double count=0,miss=0,flag3=0;
         while(fscanf(fp, "%x", &x) != EOF){
     
             //cout<<x<<endl;
             index = (x >> offset_bit) & (line - 1);
+            //cout<<index<<" ";
             tag = x >> (index_bit + offset_bit);
             bool flag=false;
             for(auto it=cache[index].begin();it!=cache[index].end();it++){
@@ -69,6 +70,7 @@ void simulate(int cache_size, int block_size, const char * file_name)
             ++count;
         }    
         fclose(fp);
+        cout<<"miss: "<<miss<<" ";
         cout<<setprecision(10)<<miss*100/count<<"%"<<endl;
        // cout << "offset_bit: "<<offset_bit<<" index_bit: "<<index_bit<<endl;
        // cout<<miss<<" "<<count<<" "<<flag3<<endl;

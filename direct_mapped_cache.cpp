@@ -43,6 +43,7 @@ void simulate(int cache_size, int block_size,const char* filename)
 		index = (x >> offset_bit) & (line - 1);
 		tag = x >> (index_bit + offset_bit);
 		if(cache[index].v && cache[index].tag == tag){
+			//cout<<index<<" ";
 			cache[index].v = true;    // hit
 		}
 		else
@@ -52,7 +53,7 @@ void simulate(int cache_size, int block_size,const char* filename)
 			++miss_num;
 		}
 	}
-
+	//cout<<" miss: "<<miss_num<<" ";
 	cout<<setprecision(10)<<miss_num/cnt*100<<"%"<<endl;
    // cout << "offset_bit: "<<offset_bit<<" index_bit: "<<index_bit<<endl;
 
@@ -63,12 +64,13 @@ void simulate(int cache_size, int block_size,const char* filename)
 	
 int main()
 {
+	cout<<"ICACHE.txt"<<endl;
 	// Let us simulate 4KB cache with 16B blocks
 	FILE *fp = fopen("ICACHE.txt","r");
 	const char *f="ICACHE.txt";
 	for(int i=4;i<=256;i*=4){
 		cout<<"*******************************************************************"<<endl;
-		for(int j=4;j<=8;j++){
+		for(int j=4;j<=9;j++){
 			simulate(i*K,pow(2,j),f);
 		}
 		cout<<"*******************************************************************"<<endl;
@@ -80,16 +82,18 @@ int main()
 	cout<<"================================================================="<<endl;
 	cout<<endl;
 
+
+	cout<<"DCACHE.txt.txt"<<endl;
 	FILE *fp2 = fopen("DCACHE.txt","r");
 	const char *f2="DCACHE.txt";
 	for(int i=4;i<=256;i*=4){
 		cout<<"*******************************************************************"<<endl;
-		for(int j=4;j<=8;j++){
+		for(int j=4;j<=9;j++){
 			simulate(i*K,pow(2,j),f2);
 		}
 		cout<<"*******************************************************************"<<endl;
 		cout<<endl;
 	}
-	fclose(fp);
+	fclose(fp2);
 
 }
